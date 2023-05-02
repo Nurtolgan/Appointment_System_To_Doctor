@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ user.username }}'s Profile</h1>
+  <h2>My Posts</h2>
+  <ul>
+    {% for post in user.post_set.all %}
+      <li>
+        <a href="{% url 'view' post.id %}">{{ post.first_name }} {{ post.last_name }} ({{ post.speciality }})</a>
+        {% if post.bookings.all %}
+          <ul>
+            {% for booking in post.bookings.all %}
+              {% if booking.status == 'approved' %}
+                <li>{{ booking.patient }} - {{ booking.date }} {{ booking.time }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No bookings yet.</p>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <h2>Approve Bookings</h2>
+  <ul>
+    {% for booking in user.bookings_to_approve.all %}
+      <li>
+        <a href="{% url 'view' booking.post.id %}">{{ booking.post.first_name }} {{ booking.post.last_name }} - {{ booking.date }} {{ booking.time }}</a>
+        <form method="post" action="{% url 'approve' booking.id %}">
+          {% csrf_token %}
+          <button type="submit">Approve</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

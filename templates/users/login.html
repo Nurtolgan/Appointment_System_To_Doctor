@@ -1,0 +1,112 @@
+
+<head>
+    <meta charset="utf-8">
+    <title>Вход</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+ <style>
+       body {
+            background-color: #f5f5f5;
+        }
+
+        .login-form {
+            width: 400px;
+            margin: 5% auto;
+            font-size: 15px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.2);
+        }
+
+        .login-form h2 {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #333;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            background-color: #f9f9f9;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #0b67c7;
+            box-shadow: 0px 0px 10px #0b67c7;
+        }
+
+        .btn {
+            background-color: #0b67c7;
+            color: #fff;
+            font-size: 18px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #0e57b5;
+            box-shadow: 0px 0px 10px #0e57b5;
+        }
+
+        a {
+            color: #0b67c7;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #0e57b5;
+        }
+</style>
+</head>
+
+{% block content %}
+<body>
+  <div class="container" >
+    <div class="login-form">
+        <h2>Авторизация</h2>
+    <br>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <center><label for="username">Имя пользователя:</label></center>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <center><label for="password">Пароль:</label></center>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <center><button type="submit" class="btn btn-primary">Жмяк</button></center>
+        </form>
+        <center><p>Нет аккаунта?<a href="{% url 'signup' %}">  Зарегаться</a></p></center>
+    </div>
+  </div></body>
+{% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

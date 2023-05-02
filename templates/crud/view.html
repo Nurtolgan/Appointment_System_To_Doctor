@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ posts.first_name }} {{ posts.last_name }}
+{% endblock title %}
+
+{% block content %}
+    <script type="text/javascript">
+    var map;
+    DG.then(function () {
+        map = DG.map('map', {
+            center: [43.2369154492405, 76.9191796818348],
+            zoom: 10
+        });
+            DG.marker([43.2369154492405, 76.91917968183448]).addTo(map);
+    });
+</script>
+<div class="container my-5" style="margin-top:10rem !important;">
+  <div class="row justify-content-center" >
+    <div class="col-md-8" >
+      <div class="card shadow-lg" style="border-radius: 30px!important;">
+        <div class="card-header bg-info text-white" style="border-top-right-radius: 30px; border-top-left-radius: 30px;">
+          <h5 class="my-1 text-center">Информационная анкета</h5>
+        </div>
+        <a href="{% url 'crud/index'%}" class="btn btn-sm btn-info" style="border-top-right-radius: 0px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px">Анкеты</a>
+        <div class="card-body">
+          <div class="row no-gutters">
+            <div class="col-md-3 text-center">
+              <br><br><br><br><img src="{{ posts.image.url }}" class="card-img-top rounded-circle" alt="Post Image">
+              <br><br><br><div class="mt-4 appointment">
+                    <a class="btn btn-success text-uppercase" style="  border-radius: 20px;
+                    background-color: #eee;
+                    color: #000;
+                    border-color: #eee;
+                    font-size: 13px;" href="{% url 'book_appointment' posts.id %}">Записаться на прием</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h3 class="card-title ">{{ posts.first_name }} {{ posts.last_name }}</h3>
+                <h5 class="card-subtitle mb-2 text-muted">{{ posts.speciality }}</h5>
+                <hr class="my-4">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <p class="font-weight-bold mb-1">Стаж работы:</p>
+                    <p class="font-weight-bold">{{ posts.experience }} год</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="font-weight-bold mb-1">Телефон:</p>
+                    <p class="font-weight-bold">{{ posts.phone }}</p>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <p class="font-weight-bold mb-1">Email:</p>
+                    <p class="font-weight-bold">{{ posts.email }}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="font-weight-bold mb-1">Местоположение:</p>
+                    <p class="font-weight-bold">{{ posts.location }}</p>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <h5 class="card-subtitle mb-2 text-muted">Образование:</h5>
+                <p class="card-text">{{ posts.education }}</p>
+                <h5 class="card-subtitle mb-2 text-muted">Процедуры:</h5>
+                <p class="card-text">{{ posts.procedure }}</p>
+                <h5 class="card-subtitle mb-2 text-muted">Местоположение на карте:</h5>
+                  <p class="card-text"><div id="map" style="width: 100%; height: 30vh; border-radius: 15px;"></div></p>
+              </div>
+            </div>
+          </div>
+          <hr class="my-4">
+{% if comments %}
+<h6><strong>Комментарии {{ comments.count }} </strong></h6>
+{% endif %}
+<h5 class="card-title mb-4">Отзывы</h5>
+{% if avg_tone_score %}
+<div class="alert alert-success" role="alert" style="border-radius: 15px">
+Средняя оценка пользователей: {{ score }}
+</div>
+{% else %}
+<div class="alert alert-info" role="alert">
+Пока нет комментариев для анализа
+</div>
+{% endif %}
+
+{% for comment in comments %}
+<div class="card my-3" style="border-radius: 15px">
+<div class="card-header"><strong>{{ comment.name }}</strong> - {{ comment.created_on }}</div>
+<div class="card-body">
+<p class="card-text">{{ comment.body }}</p>
+{% if comment.sentiment == 'P' %}
+<span class="badge badge-success text-success">Положительный</span>
+<span class="badge badge-success">Positive</span>
+{% elif comment.sentiment == 'O' %}
+
+<span class="badge badge-secondary text-secondary">Нейтральный</span>
+<span class="badge badge-secondary">Neutral</span>
+{% else %}
+<span class="badge badge-danger text-danger">Негативный отзыв</span>
+<span class="badge badge-danger">Negative</span>
+{% endif %}
+
+</div>
+</div>
+{% endfor %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning" role="alert">
+{{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% if new_comment %}
+<div class="alert alert-success" role="alert">
+Ваш комментарий ожидает модерации!
+</div>
+{% else %}
+<h5 class="card-title mb-4">Оставьте отзыв!</h5>
+{% load crispy_forms_tags %}
+<form method="post" style="margin-top: 1.3em;">
+{{ comment_form | crispy }}
+{% csrf_token %}
+<button type="submit" class="btn btn-primary btn">Отправить</button>
+</form>
+{% endif %}
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>
+.form-control {
+background-color: #e7e7e7;
+border: white;
+}
+</style>
+{% endblock content %}

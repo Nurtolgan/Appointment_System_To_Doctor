@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card-header h3 {
+        font-size: 22px;
+        font-weight: normal;
+        text-align: center;
+        margin-bottom: 6px;
+
+    }
+
+    .form-group label {
+        font-weight: bold;
+        color: #003049;
+        margin-bottom: 12px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border-color: #d9d9d9;
+        font-size: 16px;
+        color: #4a4a4a;
+        padding: 16px;
+    }
+
+    .btn-primary {
+        background-color: #003049;
+        border-color: #003049;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 12px 24px;
+        margin-top: 24px;
+    }
+
+    .btn-secondary {
+        background-color: #d9d9d9;
+        border-color: #d9d9d9;
+        color: #4a4a4a;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 12px 24px;
+        margin-top: 24px;
+    }
+
+    .btn-primary:hover, .btn-secondary:hover {
+        color: #ffffff;
+    }
+
+    .time-slot-label {
+        display: inline-block;
+        margin-right: 12px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+
+    }
+
+    @media only screen and (max-width: 768px) {
+        .card {
+            width: 100%;
+        }
+    }
+</style>
+<div class="container mt-5" >
+    <div class="row justify-content-center" style="margin-top: 150px; margin-bottom: 50px">
+        <div class="col-md-8">
+            <div class="card" style="border-radius: 25px">
+                <div class="card-header bg-info text-white" style="border-top-right-radius: 25px; border-top-left-radius: 25px">
+                    <h3>Запись</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Вы хотите записаться к:</strong>  {{ post.speciality}}у {{ post.first_name }} {{ post.last_name }} </p>
+                    <p><strong>Местоположение:</strong>  {{ post.location}} </p>
+
+<div class="alert alert-info" role="alert">
+    <ul>
+        <li>Нельзя записаться на прошедшую дату.</li>
+        <li>Нельзя записаться на прошедшее время.</li>
+        <li>Нельзя записаться на слот который уже занят другим пациентом.</li>
+        <li>Нельзя записаться на выходной день.</li>
+    </ul>
+</div>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="date">Выберите дату:</label>
+                           {{ form.date }}
+
+                        </div>
+<div class="form-group">
+    <label for="time_slot">Выберите время:</label><br>
+    <div class="row">
+        {% for time_slot in form.time_slot %}
+        {% if time_slot.choice_label in booked_time_slots %}
+        <div class="col-md-3">
+            <label class="time-slot-label btn btn-secondary disabled">
+                {{ time_slot.tag }}
+                {{ time_slot.choice_label }}
+            </label>
+        </div>
+        {% else %}
+        <div class="col-md-3">
+            <label class="time-slot-label btn btn-secondary">
+                {{ time_slot.tag }}
+                {{ time_slot.choice_label }}
+            </label>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Записаться</button>
+                            <a href="{% url 'crud/index' %}" class="btn btn-secondary ml-2">Отменить</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

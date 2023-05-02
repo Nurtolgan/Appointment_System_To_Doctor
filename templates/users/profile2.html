@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}
+  {{ user.first_name }} {{ user.last_name }} - Профиль пользователя
+{% endblock title %}
+
+{% block content %}
+<head>
+    <title>{{ user.first_name }} {{ user.last_name }} - Профиль пользователя</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f7f7f7;
+    }
+    .card {
+      border-radius: 20px;
+      margin-top: 50px;
+      width: 100%;
+      max-width: 900px!important;
+
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+    .card-header {
+      background-color: #6091ef;
+      color: white;
+      border-radius: 15px;
+      padding: 20px;
+    }
+    .card-header h3 {
+      margin-bottom: 0;
+    }
+    .card-header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .card-body strong {
+      font-size: 1.1rem;
+    }
+    .card-body .mb-3 {
+      font-size: 0.9rem;
+    }
+    @media (min-width: 768px){
+.col-md-8 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 115.666667%;
+}}
+  </style>
+</head>
+<body>
+  <div class="container my-5" >
+    <div class="row justify-content-center" >
+      <div class="col-md-8">
+        <div class="card shadow" >
+          <div class="card-header text-center">
+            <h3 class="mt-3" style="font-weight: normal">Личный кабинет</h3>
+          </div>
+          <div class="card-body" style="border-radius: 15px;">
+            <div class="row">
+              <div class="col-md-6">
+                <h3 class="mb-4" style="font-weight: normal">{{ user.first_name }} {{ user.last_name }}</h3>
+                <div class="mb-3"><strong>Пол:</strong> {{ user.get_gender_display }}</div>
+                <div class="mb-3"><strong>Дата рождения:</strong> {{ user.birth_date }}</div>
+                <div class="mb-3"><strong>Тип аккаунта:</strong> Пациент</div>
+              </div>
+              <div class="col-md-6 contact-info">
+                <h4 class="mb-4" style="font-weight: normal">Контактные данные</h4>
+                <div class="mb-3"><strong>Телефон:</strong> {{ user.phone }}</div>
+                <div class="mb-3"><strong>Почта:</strong> {{ user.email }}</div>
+              </div>
+            </div></br>
+{% if appointments %}
+<center><h5 style="font-weight: normal">Ваши записи к приему :</h5></center>
+<div class="table-responsive">
+<table class="table table-hover ">
+<thead>
+<tr>
+<th style="font-weight: normal">Специализация</th>
+<th style="font-weight: normal">Врач</th>
+<th style="font-weight: normal">Дата</th>
+<th style="font-weight: normal">Время</th>
+<th style="font-weight: normal">Локация</th>
+<th style="font-weight: normal">Контакты</th>
+<th style="font-weight: normal">Действия</th>
+</tr>
+</thead>
+<tbody>
+{% for appointment in appointments %}
+<tr style="font-weight: 350">
+<td>{{ appointment.post.speciality }}</td>
+<td>{{ appointment.post.first_name }} {{ appointment.post.last_name }}</td>
+<td>{{ appointment.date }}</td>
+<td>{{ appointment.time_slot }}</td>
+<td>{{ appointment.post.location }}</td>
+<td>{{ appointment.post.phone }}<br>{{ appointment.post.email }}</td>
+<td>
+<a href="{% url 'crud/view' appointment.post.id %}" class="btn btn-primary btn-sm" style="border-radius: 15px; margin-bottom: 8px">Смотреть анкету</a>
+<a href="{% url 'cancel_appointment' appointment.id %}" class="btn btn-danger btn-sm" style="border-radius: 15px">Отменить запись</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<p>У вас нет записей. Но в будущем вы можете их просматривать здесь</p>
+{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+{% endblock content %}

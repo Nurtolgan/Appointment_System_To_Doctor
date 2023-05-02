@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>CV - Brand</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+    <link rel="stylesheet" href="{% static 'css/Helvetica Neue.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&amp;subset=cyrillic-ext,cyrillic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/Card-hover-affect-2.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="{% static 'css/Steps-Progressbar.css'%}">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: var(--bs-light); background: linear-gradient(176deg, #3153ff, #0ea0ff)">
+        <div class="container"><a class="navbar-brand logo" href="#" style="font-size: 36px;width: 163.25px;font-family: Inter, sans-serif;font-weight: bold;">FindaDoc</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav" style="width: 1086.75px;margin: 0;font-family: Inter, sans-serif;">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}" style="font-size: 19px;font-weight: normal;font-family: Inter, sans-serif;">Главная&nbsp;</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#about" style="font-size: 19px;font-weight: normal;font-family: Inter, sans-serif;">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacts" style="font-size: 19px;font-weight: normal;font-family: Inter, sans-serif;">Контакты</a></li>
+                </ul>
+
+                {% if user.is_authenticated %}
+                <a style="font-size: 19px; color:white; text-decoration: none;" href = "{% url 'profile2' %}">Мой кабинет</a>
+                    <a style="font-size: 19px; color:white; text-decoration: none; margin-left: 20px" href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                    <a style="font-size: 19px; color:white; text-decoration: none; margin-left: 20px" href="{% url 'login' %}">Войти</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    <main class="page cv-page">
+
+        <section class="portfolio-block block-intro border-bottom" style="height: 856px;padding-top: 118px;margin-top: -2px;margin-bottom: 179px;">
+            <div class="container" style="margin-top: -27px;height: 742px;width: 1372px;max-width: 1166px;">
+                <div class="avatar" style="background: url('../static/img/avatars/Tempclipboard-image.png') bottom / cover space, #ffffff;text-align: left;font-weight: normal;border-style: none;border-radius: 0;width: 600px;height: 420px;margin: -7px;margin-left: 624px;transform: translate(125px) translateX(-174px) translateY(65px) scale(1.14) skew(0deg) skewX(0deg);"></div>
+                <div class="about-me">
+    <p style="font-family: Inter, sans-serif;font-weight: normal;font-style: normal;padding-top: 0;transform: translate(-492px) translateX(364px) translateY(-293px);margin-bottom: 0px;height: 250px;width: 500px;color: rgb(115,115,115);letter-spacing: 0px;">Онлайн-платформа для бронирования медицинских услуг. Удобный способ найти и забронировать время у врача или клиники в Интернете, без необходимости звонить в офис или посещать лично.<br /></p><a class="btn btn-outline-primary" role="button" href="{% url 'crud/index' %}" style="width: 217.45px;height: 59px;font-size: 28px;padding-bottom: -38px;margin-top: -18px;transform: translateX(-273px) translateY(-250px) scale(0.70);font-family: 'Helvetica Neue';font-weight: bold;border-color: rgb(14, 160, 255);">Найти!</a>
+</div>
+<div class="heading" style="width: 532px;">
+    <h2 class="text-center" style="width: 375px;font-family: Inter, sans-serif;margin-top: -649px;margin-left: 95px;color: rgba(62,62,62,0.87);background: #b2f7df;border-radius: 16px;font-size: 28px;text-shadow: 0px 0px rgba(62,62,62,0.58);box-shadow: 9px 8px 3px rgba(150,150,150,0.66);font-weight: bold;transform: scale(1.05);border-color: rgba(62,62,62,0.7);">Сервис для поиска<br /></h2>
+</div>
+            </div>
+        </section>
+        <section class="portfolio-block cv" style="padding: -95px 0px 100px;padding-top: -42px;margin-top: -178px;">
+            <div class="container" style="padding-top: 217px;margin-top: 0px;height: 2797.4px;">
+                <div class="work-experience group" style="padding: -152px;transform: translateY(-194px);">
+                    <div class="heading">
+                        <h2 class="text-center">Врачи</h2>
+                    </div>
+                    <div class="item" style="width: 813px;">
+                        <div class="row">
+                            <div class="col-md-6 offset-0">
+                                <h3>A</h3>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Акушер&nbsp;</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Андролог</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Аллерголог</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Аллерголог</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Аритмолог</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Аритмолог</h4>
+                            </div>
+                            <div class="col offset-0" style="padding-right: -8px;padding-left: 3px;"><span class="period"></span>
+                                <h3>В</h3>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Венеролог</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item" style="font-family: 'Helvetica Neue';">
+                        <div class="row">
+                            <div class="col-6" style="margin-bottom: 25px;">
+                                <h3>Г</h3>
+                                <h4 class="organization" style="width: 130.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Гастроэнтеролог</h4>
+                                <h4 class="organization" style="width: 130.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Гематолог</h4>
+                                <h4 class="organization" style="width: 130.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Гастроэнтеролог</h4>
+                                <h4 class="organization" style="width: 130.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Гепатолог</h4>
+                                <h4 class="organization" style="width: 130.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Гинеколог</h4>
+                                <h4 class="organization" style="width: 130.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Гирудотерап.</h4>
+                            </div>
+                            <div class="col" style="margin-bottom: 25px;">
+                                <h3>Д</h3>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Дерматовене.</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Дерматолог</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Диетолог</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 offset-0">
+                                <h3>И</h3>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Иммунолог</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Инфекционист</h4>
+                            </div>
+                            <div class="col offset-0"><span class="period"></span>
+                                <h3>К</h3>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Кардиолог</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Кардиохирург</h4>
+                                <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Косметолог</h4>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6 offset-0">
+                                    <h3>Л</h3>
+                                    <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Логопед</h4>
+                                    <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Лор</h4>
+                                </div>
+                                <div class="col offset-0"><span class="period"></span>
+                                    <h3>М</h3>
+                                    <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;">Маммолог</h4>
+                                    <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Массажист</h4>
+                                    <h4 class="organization" style="width: 115.6375px;height: 30px;font-size: 15px;text-align: center;padding-top: 5px;margin-left: 4px;">Медсестра</h4>
+                                    <h4 class="organization" style="width: 115.6375px;height: 44px;font-size: 15px;text-align: center;padding-top: 5px;padding-left: -47px;">Мануальный терапевт</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-center" style="margin-top: -72px;margin-bottom: -39px;text-align: center;">Шаги для записи к врачу</h2>
+                <div class="education group">
+                    <div class="item">
+                        <p class="text-muted" style="margin-bottom: 1px;text-align: center;font-family: Inter, sans-serif;">Чтобы опробовать онлайн-платформа&nbsp;для бронирования медицинских услугу, следуйте несколько простым шагам.&nbsp;</p>
+                    </div>
+                </div>
+                <div class="steps-progressbar" style="font-family: 'Helvetica Neue';">
+                    <ul>
+                        <li class="previous" style="font-size: 18px;">1. Создайте аккаунт<br></li>
+                        <li class="active" style="font-size: 18px;">2.&nbsp;Выберите врача и удобное время<br></li>
+                        <li style="font-size: 18px;">3.&nbsp;Забронируйте прием<br></li>
+                        <li style="font-size: 18px;">4. Оставьте отзыв посещение!</li>
+                    </ul>
+                    <div id="about"></div>
+                </div>
+
+                <div class="hobbies group" style="padding-top: 116px;padding-bottom: 68px;">
+
+                    <div class="heading">
+                        <h2 class="text-center" style="margin-bottom: -72px;">О нас</h2>
+
+                    </div>
+                    <p class="text-center text-muted" style="font-family: Inter, sans-serif;"><br>Добро пожаловать на наш сайт записи к врачу! Мы являемся онлайн-платформой, предназначенной для удобной записи к врачу в удобное для Вас время. Наша миссия - обеспечить легкий доступ к качественной медицинской помощи. Наши клиенты имеют возможность выбирать врачей из широкого списка специалистов, а также удобно распределять время для посещения. Мы уверены, что это помогает нашим пользователям сэкономить время и силы, необходимые для получения квалифицированной медицинской помощи. Наша команда состоит из опытных профессионалов в области медицины и технологий, которые постоянно работают над улучшением нашего сервиса. Мы убеждены, что наши пользователи заслуживают лучшего опыта взаимодействия с медицинской системой, и мы стремимся обеспечить этот опыт. Мы убеждены, что забота о Вашем здоровье - это самое важное. Мы делаем все возможное, чтобы обеспечить Вам удобный и надежный доступ к медицинской помощи. Спасибо за то, что выбрали наш сервис!<br><br></p>
+                    <h2 class="text-center" style="margin-bottom: -95px;margin-top: 85px;">Для врачей</h2>
+                    <p class="text-center text-muted" style="font-family: Inter, sans-serif;margin-top: 100px;"><br><br><div id="contacts"></div>Наш сервис предоставляет возможность врачам создавать личные аккаунты на платформе, чтобы они могли предоставлять дополнительную информацию о своей практике и услугах.&nbsp; Мы уверены, что это помогает создать более доверительную и прозрачную связь между врачами и пациентами, что в свою очередь приводит к лучшим результатам лечения и удовлетворенности пациентов. Мы ценим связь между врачами и пациентами и стремимся сделать нашу платформу более функциональной и удобной для всех пользователей. Если у вас есть предложения или отзывы, пожалуйста, свяжитесь с нами. Мы всегда готовы улучшить наш сервис для Вас!<br><br></p>
+                    <div class="contact-info portfolio-info-card" style="transform: translateX(464px) translateY(65px);width: 650px;margin-top: -34px;margin-left: -394px;border-radius: 27px;box-shadow: 7px 6px 10px rgba(122,121,121,0.67);">
+
+                        <h2 style="transform: scale(1);text-align: center;">Наши контакты</h2>
+                        <div class="row">
+                            <div class="col-1"><i class="icon ion-android-calendar icon"></i></div>
+                            <div class="col-9"><span>Время работы 8:00-22-00</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><i class="icon ion-ios-telephone icon"></i></div>
+                            <div class="col-9"><span>+7701-664-13-90</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><i class="icon ion-at icon"></i></div>
+                            <div class="col-9"><span>Почта для наших клиентов: forpatient@gmail.com</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><i class="icon ion-at icon"></i></div>
+                            <div class="col-9"><span>Почта по вопросам для группы врачей: fordoctor@gmail.com</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer" style="border-top-width: 1px;background: linear-gradient(-51deg, var(--bs-indigo), rgba(104,210,255,0.97));height: 139.6px;">
+        <div class="container" style="margin-top: -33px;height: 129.6px;">
+            <div class="links"><a href="#" style="border-style: none;"></a></div><a class="navbar-brand logo" href="#" style="font-size: 36px;width: 163.25px;font-family: Inter, sans-serif;font-weight: bold;margin-right: 33px;color: rgb(255,255,255);">FindaDoc</a>
+            <div class="social-icons" style="border-top-color: rgba(33,37,41,0);"><a href="#" style="color: var(--bs-white);background: rgb(31,98,248);"><i class="icon ion-social-facebook"></i></a><a href="#" style="color: rgb(255,255,255);background: #820247;"><i class="icon ion-social-instagram-outline"></i></a><a href="#" style="background: rgb(6,180,255);"><i class="icon ion-social-twitter"></i></a></div>
+        </div>
+    </footer>
+{% endblock %}
+    <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../static/js/Card-hover-affect-2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="../static/js/theme.js"></script>
+</body>
+
+</html>

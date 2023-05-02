@@ -1,0 +1,144 @@
+<head>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        width: 800px!important; ;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+     font-weight: bold;
+
+}
+      .signup-form {
+          margin-top: 30px!important;
+            max-width: 600px!important;
+          margin-bottom: 100px!important;
+
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 30px;
+      }
+
+      .signup-form h4 {
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+
+select {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+      .form-control {
+        border-radius: 15px;
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      .form-label {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 20px;
+        color: #fff;
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+label {
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+
+}
+
+      .btn-primary:hover {
+        background-color: #0062cc;
+
+      }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <form method="post" class="signup-form">
+        <center><h2>Регистрация</h2></center>
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}" class="form-label">Имя пользователя</label>
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.first_name.id_for_label }}" class="form-label">Имя</label>
+        {{ form.first_name }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.last_name.id_for_label }}" class="form-label">Фамилия</label>
+        {{ form.last_name }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.gender.id_for_label }}" class="form-label">Пол</label>
+        {{ form.gender }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.birth_date.id_for_label }}" class="form-label">Дата рождения</label>
+        {{ form.birth_date }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.phone.id_for_label }}" class="form-label">Телефон</label>
+        {{ form.phone }}
+
+      </div>
+      <div class="form-group">
+        <label for="{{ form.groups.id_for_label }}" class="form-label">Тип аккаунта</label>
+        {{ form.groups }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+        {{ form.email }}
+      </div>
+          <div class="form-group">
+        <label for="{{ form.password1.id_for_label }}">Пароль:</label>
+        {{ form.password1 }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.password2.id_for_label }}">Подтвердите пароль:</label>
+        {{ form.password2 }}
+    </div>
+        <center><div class="form-group">
+        <a href="{% url 'login' %}" >Есть аккаунт?</a>
+        </div>
+      <button type="submit" class="btn btn-primary" style="background-color: #0e57b5; align-items: center">Нажать</button>
+    </center>
+    </form>
+  </div>
+</body>

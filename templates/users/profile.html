@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <style>
+    .profile-update {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f8f8f8;
+    }
+
+    .profile-update td {
+      padding: 10px;
+    }
+
+    .profile-update input[type="text"],
+    .profile-update input[type="email"],
+    .profile-update input[type="password"],
+    .profile-update input[type="gender"]{
+      display: block;
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      box-sizing: border-box;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .profile-update .btn {
+      display: block;
+      width: 100%;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 15px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .profile-update .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+
+  <form method="post" class = "profile-update">
+      <h2>Профиль</h2>
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <button type="submit" class="btn btn-primary">Изменить</button>
+  </form>
+</body>
+</html>

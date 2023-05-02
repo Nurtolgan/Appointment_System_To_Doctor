@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Create
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5" style="margin-top: 150px!important;">
+  <div class="card" >
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h4>Создать анкету для врача</h4>
+      <a href="{% url 'crud/index'%}" class="btn btn-sm btn-success">Назад</a>
+    </div>
+    <div class="card-body">
+      <form method="get">
+        <div class="form-group my-3">
+          <input type="text" name="search_user" class="form-control" placeholder="Искать по username">
+        </div>
+        <button type="submit" class="btn btn-primary">Искать врача/Сбросить</button>
+      </form>
+      <form action="{% url 'crud/store'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group my-3">
+          <label for="user">Автор анкеты (Врач):</label>
+          {{ form.user}}
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group my-3">
+              <label for="first_name">Имя:</label>
+              <input type="text" class="form-control" name="first_name" placeholder="Имя врача">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group my-3">
+              <label for="last_name">Фамилия:</label>
+              <input type="text" class="form-control" name="last_name" placeholder="Фамилия врача">
+            </div>
+          </div>
+        </div>
+        <div class="form-group my-3">
+          <label for="image">Фото:</label>
+          <input type="file" class="form-control-file" name="image" accept="image/*">
+        </div>
+        <div class="form-group my-3">
+          <label for="speciality">Специализация:</label>
+          <input type="text" class="form-control" name="speciality" placeholder="Специализация (Если их больше одного, введите через запятые)">
+        </div>
+        <div class="form-group my-3">
+          <label for="experience">Опыт:</label>
+          <input type="number" class="form-control" name="experience" placeholder="Опыт врача">
+        </div>
+        <div class="form-group my-3">
+          <label for="phone">Номер телефона:</label>
+          <input type="tel" class="form-control" name="phone" placeholder="Телефон врача">
+        </div>
+        <div class="form-group my-3">
+          <label for="email">Почта:</label>
+          <input type="email" class="form-control" name="email" placeholder="Email">
+        </div>
+        <div class="form-group my-3">
+          <label for="location">Локация:</label>
+          <input type="text" class="form-control" name="location" placeholder="Место приема врача">
+        </div>
+        <div class="form-group my-3">
+          <label for="education">Образование:</label>
+          <input type="text" class="form-control" name="education" placeholder="Образование врача">
+        </div>
+        <div class="form-group my-3">
+          <label for="procedure">Проводимые процедуры:</label>
+          <input type="text" class="form-control" name="procedure" placeholder="Проводимые процедуры врачом:">
+        </div>
+        <div class="my-3">
+            <button class="btn btn-success btn-block">Подтвердить</button>
+        </div>
+    </form>
+
+</div>
+  </div>
+    </div>
+{% endblock content %}

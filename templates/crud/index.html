@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+All Posts
+{% endblock title %}
+
+{% block content %}
+<style>
+.card {
+border-radius: 10px;
+box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+</style>
+<script>
+function resetFilter() {
+    window.location.href = window.location.pathname;
+}
+</script>
+<div class="container my-5" style="margin-top: 150px!important;">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <h3>Частные врачи Алматы</h3>
+                </div>
+                <div class="align-self-center">
+                    <a href="{% url 'crud/create' %}" class="btn btn-sm btn-success">Создать анкету для врача</a>
+                    <a href="{% url 'home'%}" class="btn btn-sm btn-info">Главная страница</a>
+                </div>
+            </div>
+            <hr>
+            <form method="GET" class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Искать по специализации" name="q" value="{{ request.GET.q }}">
+                    <button class="btn btn-outline-secondary" type="button" onclick="resetFilter()">Сбросить фильтр</button>
+                    <button class="btn btn-outline-secondary" type="submit">Искать</button>
+                </div>
+
+            </form>
+            {% if results %}
+            <p>Показывает {{ results|length }} результатов</p>
+            {% for post in results %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-md-3 text-center">
+                    <img class="card-img-top rounded-circle" src="{{ post.image.url }}" alt="Card image cap">
+                    {% if post.avg_tone_score %}
+                    <p class="card-text"><strong>Средняя оценка пользователей:</strong><br> {{ post.avg_tone_score }} из 10</p>
+                    {% endif %}
+                        <a class="card-text" href="{% url 'crud/view' post.id %}" style="text-decoration: none; color:#5194c1"><strong>{{ post.num_comments}} отзывов</strong> </a>
+                    </div>
+                        <div class="col-md-9">
+                            <h4 class="card-title">{{ post.first_name }} {{ post.last_name }}</h4>
+                            <p class="card-text"><strong>Специализация:</strong> {{ post.speciality }}</p>
+                            <p class="card-text"><strong>Стаж работы:</strong> {{ post.experience }} лет</p>
+                            <p class="card-text"><strong>Телефон:</strong> {{ post.phone }}</p>
+                            <p class="card-text"><strong>Email:</strong> {{ post.email }}</p>
+                            <p class="card-text"><strong>Место:</strong> {{ post.location }}</p>
+                            <p class="card-text"><strong>Образование:</strong> {{ post.education }}</p>
+                            <p class="card-text"><strong>Проводимые процедуры:</strong> {{ post.procedure }}</p>
+                            <div class="d-flex justify-content-end mt-3">
+                                <a href="{% url 'book_appointment' post.id %}" class="btn btn-sm btn-primary me-2">Записаться</a>
+                                <a href="{% url 'crud/view' post.id %}" class="btn btn-sm btn-success me-2">Подробнее о враче </a>
+                                <a href="{% url 'crud/edit' post.id %}"  class="btn btn-sm btn-info me-2">Редактировать</a>
+                                <a href="{% url 'crud/delete' post.id %}" class="btn btn-sm btn-danger">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Ничего не найдено</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
