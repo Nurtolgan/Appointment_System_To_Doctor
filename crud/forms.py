@@ -8,6 +8,7 @@ from users.models import CustomUser
 from .models import Post, Comment, Zapis
 import datetime as date
 
+
 class PostForm(forms.ModelForm):
     search_user = forms.CharField(max_length=100, required=False)
 
@@ -39,7 +40,7 @@ class CommentForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         if user:
-            self.fields['name'].initial = user.username
+            self.fields['name'].initial = user.first_name
             self.fields['name'].widget.attrs['readonly'] = True
             self.fields['email'].initial = user.email
             self.fields['email'].widget.attrs['readonly'] = True
@@ -56,7 +57,6 @@ class TranslatedCommentForm(forms.ModelForm):
         }
 
 
-
 class AppointmentForm(forms.ModelForm):
     date = forms.DateField(
         widget=forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
@@ -66,7 +66,7 @@ class AppointmentForm(forms.ModelForm):
         widget=forms.RadioSelect(),
         label='Time Slot',
         choices=(
-            ('9:00', '9:00'),
+            ('09:00', '09:00'),
             ('10:00', '10:00'),
             ('11:00', '11:00'),
             ('12:00', '12:00'),
@@ -86,7 +86,6 @@ class AppointmentForm(forms.ModelForm):
         selected_datetime = date.datetime.combine(selected_date, date.datetime.min.time())
         if selected_datetime.weekday() == 6:
             raise ValidationError("Appointments are not available on Sundays.")
-
         return selected_date
 
 

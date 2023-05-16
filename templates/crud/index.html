@@ -24,7 +24,7 @@ function resetFilter() {
                     <h3>Частные врачи Алматы</h3>
                 </div>
                 <div class="align-self-center">
-                    <a href="{% url 'crud/create' %}" class="btn btn-sm btn-success">Создать анкету для врача</a>
+                    <a href="{% url 'crud/create' %}" class="btn btn-sm btn-success">Создать анкету врача</a>
                     <a href="{% url 'home'%}" class="btn btn-sm btn-info">Главная страница</a>
                 </div>
             </div>
@@ -32,7 +32,7 @@ function resetFilter() {
             <form method="GET" class="mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Искать по специализации" name="q" value="{{ request.GET.q }}">
-                    <button class="btn btn-outline-secondary" type="button" onclick="resetFilter()">Сбросить фильтр</button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="resetFilter()">Сбросить поиск</button>
                     <button class="btn btn-outline-secondary" type="submit">Искать</button>
                 </div>
 
@@ -56,7 +56,7 @@ function resetFilter() {
                             <p class="card-text"><strong>Стаж работы:</strong> {{ post.experience }} лет</p>
                             <p class="card-text"><strong>Телефон:</strong> {{ post.phone }}</p>
                             <p class="card-text"><strong>Email:</strong> {{ post.email }}</p>
-                            <p class="card-text"><strong>Место:</strong> {{ post.location }}</p>
+                            <p class="card-text"><strong>Место приема:</strong> {{ post.location }}</p>
                             <p class="card-text"><strong>Образование:</strong> {{ post.education }}</p>
                             <p class="card-text"><strong>Проводимые процедуры:</strong> {{ post.procedure }}</p>
                             <div class="d-flex justify-content-end mt-3">

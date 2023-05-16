@@ -24,8 +24,6 @@ class SignUpView(CreateView):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-
-
             user_group = Group.objects.get(name=form.cleaned_data['groups'])
             user.groups.add(user_group)
 
@@ -33,11 +31,7 @@ class SignUpView(CreateView):
             # for form_ug in form.cleaned_data['groups']:
             #     user_group = Group.objects.get(name=form_ug.name)
             #     user.groups.add(user_group)
-
-
             logout(request)
-
-
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],
                                     )
@@ -53,7 +47,6 @@ class LoginView(LoginView):
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
-            #if user's group is 'Доктор' redirect to home page
             if self.request.user.groups.filter(name='Доктор').exists():
                 return redirect('logout')
         return self.render_to_response(self.get_context_data())

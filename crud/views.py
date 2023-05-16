@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count, Avg
 from .filters import PostFilter
 
+
 def index(request):
     if request.method == 'GET':
         query = request.GET.get('q')
@@ -27,7 +28,6 @@ def index(request):
                 num_comments=Count('comments')).order_by('-experience')
         else:
             results = Post.objects.all().annotate(num_comments=Count('comments')).order_by('-experience')
-
         for post in results:
             comments = post.comments.filter(active=True)
             tone_scores = []
@@ -36,11 +36,10 @@ def index(request):
                 tone_scores.append(tone_score)
             if tone_scores:
                 avg_tone_score = round((sum(tone_scores) / len(tone_scores)) * 5 + 5, 1)
-
             else:
                 avg_tone_score = None
-
             post.avg_tone_score = avg_tone_score
+
         results = sorted(results, key=lambda x: x.avg_tone_score or 0, reverse=True)
 
     posts = Post.objects.all()
@@ -148,6 +147,7 @@ def store(request):
 #                                               "comment_form": comment_form,
 #                                               "avg_tone_score": avg_tone_score,
 #                                               "score": score})
+
 import googletrans
 from googletrans import *
 
@@ -155,7 +155,6 @@ from googletrans import *
 def view(request, id):
     post = get_object_or_404(Post, id=id)
     comments = post.comments.filter(active=True)
-    print(comments)
     new_comment = None
     tone_scores = []
     comment_form = CommentForm(user=request.user)
@@ -174,16 +173,13 @@ def view(request, id):
                     lang = translator.detect(new_comment.body).lang
                     if lang == 'en':
                         translated_comment.translated_body = new_comment.body
-                        print('en')
-
                     else:
                         translated_comment.translated_body = translator.translate(new_comment.body).text
-                        print('ru')
                     print(translated_comment.translated_body)
                     blob = TextBlob(translated_comment.translated_body)
                     tone_score = blob.sentiment.polarity
                     print(tone_score)
-                    if tone_score > 0.3 :
+                    if tone_score > 0.3:
                         new_comment.sentiment = 'P'
                         print('P')
                     elif tone_score < -0.2:
@@ -195,7 +191,6 @@ def view(request, id):
                     new_comment.sentiment_score = tone_score
                 except:
                     new_comment.sentiment = 'O'
-                    print('neutral 00000')
                     translated_comment.translated_body = new_comment.body
                     new_comment.sentiment_score = 0.0
 
@@ -204,7 +199,6 @@ def view(request, id):
                 translated_comment.save()
     else:
         comment_form = CommentForm(user=request.user)
-
     for comment in comments:
         tone_score = comment.sentiment_score
         tone_scores.append(tone_score)
@@ -223,10 +217,13 @@ def view(request, id):
                                               "avg_tone_score": avg_tone_score,
                                               "score": score})
 
+
+@login_required(login_url='/login/')
 def delete(request, id):
     Post.objects.get(id=id).delete()
     messages.info(request, 'Data Deleted successful')
     return redirect('crud/index')
+
 
 @login_required(login_url='/login/')
 def edit(request, id):
@@ -234,6 +231,7 @@ def edit(request, id):
     return render(request, 'crud/edit.html', {"post": post})
 
 
+@login_required(login_url='/login/')
 def update(request, id):
     post = get_object_or_404(Post, id=id)
     form = PostForm(request.POST or None, instance=post)
@@ -251,7 +249,8 @@ def update(request, id):
 
 from datetime import datetime, time
 
-@login_required
+
+@login_required(login_url='/login/')
 def book_appointment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = AppointmentForm()

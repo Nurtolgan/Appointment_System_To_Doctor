@@ -84,7 +84,7 @@
 <body>
   <div class="container" >
     <div class="login-form">
-        <h2>Авторизация</h2>
+        <h2>Вход</h2>
     <br>
         <form method="post">
             {% csrf_token %}
@@ -96,7 +96,7 @@
                 <center><label for="password">Пароль:</label></center>
                 <input type="password" name="password" id="password" required>
             </div>
-            <center><button type="submit" class="btn btn-primary">Жмяк</button></center>
+            <center><button type="submit" class="btn btn-primary">Нажать</button></center>
         </form>
         <center><p>Нет аккаунта?<a href="{% url 'signup' %}">  Зарегаться</a></p></center>
     </div>

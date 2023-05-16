@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
 from .models import CustomUser
 from django.contrib.auth.models import Group
 import datetime
@@ -15,7 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
             'phone': forms.TextInput(attrs={'type': 'tel', 'pattern': '[0-9]{11}', 'placeholder': '87xx-xxx-xx-xx',}),
-            'gender': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Выберите пол', 'width': '30%'}),
+            'gender': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Выберите пол', 'width': '90%'}),
             'groups': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Выберите группу', }),
         }
 
