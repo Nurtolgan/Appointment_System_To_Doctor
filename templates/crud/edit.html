@@ -4,66 +4,64 @@
   Edit | {{ post.first_name }} {{ post.last_name }}
 {% endblock title %}
 
-{% block content %}
-<div class="col-md-8" style="margin-top: 150px!important; margin-left: 150px;">
-    <div class="d-flex justify-content-between">
-        <div>
-            <h5>Редактировать анкету</h5>
+{% block content %}<div class="col-md-8 mx-auto mt-5">
+    <div class="card rounded">
+        <div class="card-header">
+            <h5 class="card-title">Редактировать анкету</h5>
         </div>
-        <div class="align-self-center">
-            <a href="{% url 'crud/index' %}" class="btn btn-sm btn-success">Назад</a>
+        <div class="card-body">
+            <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-sm btn-success mb-3">Назад</a>
+            <form action="{% url 'crud/update' post.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">Имя:</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" value="{{ post.first_name }}">
+                </div>
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Фамилия:</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" value="{{ post.last_name }}">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Фото:</label>
+                    <input type="file" class="form-control-file" name="image" id="image">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="Post Image" class="img-fluid mt-3" style="max-height: 200px;">
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="speciality" class="form-label">Специальность:</label>
+                    <input type="text" class="form-control" name="speciality" id="speciality" placeholder="Speciality" value="{{ post.speciality }}">
+                </div>
+                <div class="mb-3">
+                    <label for="experience" class="form-label">Опыт:</label>
+                    <input type="number" class="form-control" name="experience" id="experience" placeholder="Experience" value="{{ post.experience }}">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Номер:</label>
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number" value="{{ post.phone }}">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Почта:</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ post.email }}">
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Адрес:</label>
+                    <input type="text" class="form-control" name="location" id="location" placeholder="Location" value="{{ post.location }}">
+                </div>
+                <div class="mb-3">
+                    <label for="education" class="form-label">Образование:</label>
+                    <textarea class="form-control" name="education" id="education" placeholder="Education">{{ post.education }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="procedure" class="form-label">Проводимые процедуры:</label>
+                    <textarea class="form-control" name="procedure" id="procedure" placeholder="Procedure">{{ post.procedure }}</textarea>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-success btn-block">Обновить</button>
+                </div>
+            </form>
         </div>
     </div>
-    <hr>
-    <form action="{% url 'crud/update' post.id %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group my-3">
-            <span class="text-muted">Имя:</span>
-            <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ post.first_name }}">
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Фамилия:</span>
-            <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ post.last_name }}">
-        </div>
-        <div class="form-group my-3">
-            <label for="image">Фото:</label>
-            <input type="file" class="form-control-file" name="image" id="image">
-            {% if post.image %}
-                <img src="{{ post.image.url }}" alt="Post Image" class="img-fluid mt-3" style="max-height: 200px;">
-            {% endif %}
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Специальность:</span>
-            <input type="text" class="form-control" name="speciality" placeholder="Speciality" value="{{ post.speciality }}">
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Опыт</span>
-            <input type="number" class="form-control" name="experience" placeholder="Experience" value="{{ post.experience }}">
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Номер:</span>
-            <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="{{ post.phone }}">
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Почта:</span>
-            <input type="email" class="form-control" name="email" placeholder="Email" value="{{ post.email }}">
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Адрес:</span>
-            <input type="text" class="form-control" name="location" placeholder="Location" value="{{ post.location }}">
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Образование:</span>
-            <textarea class="form-control" name="education" placeholder="Education">{{ post.education }}</textarea>
-        </div>
-        <div class="form-group my-3">
-            <span class="text-muted">Проводимые процедуры:</span>
-            <textarea class="form-control" name="procedure" placeholder="Procedure">{{ post.procedure }}</textarea>
-        </div>
-        <div class="my-3">
-            <button class="btn btn-success btn-block">Обновить</button>
-        </div>
-
-    </form>
 </div>
+
 {% endblock content %}

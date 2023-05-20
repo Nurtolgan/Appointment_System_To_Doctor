@@ -16,7 +16,9 @@ urlpatterns = [
     path('book_appointment/<int:post_id>/', views.book_appointment, name='book_appointment'),
     path('appointments/<int:appointment_id>/cancel/', views.cancel_appointment, name='cancel_appointment'),
     path('profile2/reject_selected/', views.reject_selected_appointments, name='reject_selected_appointments'),
-
+    path('admin', views.admin, name='crud/admin'),
+    path('auth', views.auth, name='crud/auth'),
+    path('comments', views.comment_approval, name='crud/admin_com'),
 ]
 
 

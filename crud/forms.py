@@ -8,7 +8,7 @@ from users.models import CustomUser
 from .models import Post, Comment, Zapis
 import datetime as date
 
-
+#Форма создания анкеты
 class PostForm(forms.ModelForm):
     search_user = forms.CharField(max_length=100, required=False)
 
@@ -21,7 +21,7 @@ class PostForm(forms.ModelForm):
 
     user = forms.ModelChoiceField(queryset=CustomUser.objects.all())
 
-
+#Форма оставления комментария
 class CommentForm(forms.ModelForm):
     name = forms.CharField(label='Ваше имя')
     email = forms.EmailField(label='Почта')
@@ -45,7 +45,7 @@ class CommentForm(forms.ModelForm):
             self.fields['email'].initial = user.email
             self.fields['email'].widget.attrs['readonly'] = True
 
-
+#Форма перевода комментария
 class TranslatedCommentForm(forms.ModelForm):
     translated_body = forms.CharField(widget=forms.Textarea, label='Перевод')
 
@@ -56,7 +56,7 @@ class TranslatedCommentForm(forms.ModelForm):
             'translated_body': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
         }
 
-
+#Форма записи на прием
 class AppointmentForm(forms.ModelForm):
     date = forms.DateField(
         widget=forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),

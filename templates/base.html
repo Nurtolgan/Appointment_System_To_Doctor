@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="{% static 'css/Steps-Progressbar.css'%}">
     <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
 </head>
-
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient" style="color: var(--bs-light); background: linear-gradient(176deg, #3153ff, #0ea0ff)">
         <div class="container"><a class="navbar-brand logo" href="#" style="font-size: 36px;width: 163.25px;font-family: Inter, sans-serif;font-weight: bold;">FindaDoc</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -29,6 +28,7 @@
                     <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}" style="font-size: 19px;font-weight: normal;font-family: Inter, sans-serif;">Главная&nbsp;</a></li>
                     <li class="nav-item"><a class="nav-link active" href="#about" style="font-size: 19px;font-weight: normal;font-family: Inter, sans-serif;">О нас</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contacts" style="font-size: 19px;font-weight: normal;font-family: Inter, sans-serif;">Контакты</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'crud/admin' %}" style="font-size: 19px;font-weight: normal;font-family: Inter, sans-serif;">Админ панель</a></li>
                 </ul>
 
                 {% if user.is_authenticated %}
@@ -40,7 +40,6 @@
             </div>
         </div>
     </nav>
-
     {% block content %}
     <main class="page cv-page">
 
@@ -206,6 +205,7 @@
     <script src="../static/js/Card-hover-affect-2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="../static/js/theme.js"></script>
+
 </body>
 
 </html>

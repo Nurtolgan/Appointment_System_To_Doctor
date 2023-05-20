@@ -13,7 +13,7 @@ from . forms import CustomUserCreationForm, CustomUserChangeForm
 def home(request):
     return render(request, 'base.html')
 
-
+#Функция регистрации
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('home')
@@ -42,6 +42,7 @@ class SignUpView(CreateView):
             return render(request, self.template_name, {'form' : form })
 
 
+#Функция входа
 class LoginView(LoginView):
     template_name = 'users/login.html'
 
@@ -64,7 +65,7 @@ def profile_update(request):
         form = CustomUserChangeForm(instance=user)
     return render(request, 'users/profile.html', {'form': form})
 
-
+#Функция которая возвращает профиль пациента, либо профиль доктора
 @login_required
 def profile_two(request):
     if request.user.groups.filter(name='Доктор').exists():

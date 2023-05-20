@@ -9,7 +9,7 @@
   <div class="card" >
     <div class="card-header d-flex justify-content-between align-items-center">
       <h4>Создать анкету для врача</h4>
-      <a href="{% url 'crud/index'%}" class="btn btn-sm btn-success">Назад</a>
+      <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-sm btn-success">Назад</a>
     </div>
     <div class="card-body">
       <form method="get">
